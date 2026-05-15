@@ -187,11 +187,6 @@ button {
     linear-gradient(0deg, rgba(22, 27, 23, 0.88), transparent 48%, rgba(22, 27, 23, 0.26));
 }
 
-.section-decor {
-  pointer-events: none;
-  user-select: none;
-}
-
 .hero-content {
   position: relative;
   z-index: 2;
@@ -203,7 +198,7 @@ button {
 .section-kicker,
 .label {
   margin: 0 0 14px;
-  color: var(--gold);
+  color: var(--section-accent, var(--gold));
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -284,16 +279,16 @@ button {
   width: 9px;
   height: 9px;
   padding: 0;
-  border: 1px solid rgba(38, 56, 43, 0.34);
+  border: 1px solid var(--dot-border, rgba(38, 56, 43, 0.34));
   border-radius: 50%;
-  background: rgba(255, 250, 240, 0.72);
+  background: var(--dot-bg, rgba(255, 250, 240, 0.72));
   cursor: pointer;
   transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
 .scroll-dot.is-active {
-  border-color: var(--olive);
-  background: var(--olive);
+  border-color: var(--dot-active, var(--olive));
+  background: var(--dot-active, var(--olive));
   transform: scale(1.18);
 }
 
@@ -323,6 +318,12 @@ button {
   position: relative;
   padding: 98px clamp(22px, 6vw, 76px);
   overflow: hidden;
+  isolation: isolate;
+  color: var(--section-ink, var(--ink));
+  background-color: var(--section-base, var(--paper));
+  background-image: var(--section-bg, none);
+  background-position: center;
+  background-size: cover;
 }
 
 .section::before {
@@ -330,42 +331,92 @@ button {
   left: clamp(22px, 6vw, 76px);
   right: clamp(22px, 6vw, 76px);
   top: 0;
+  z-index: 1;
   height: 1px;
   content: "";
-  background: linear-gradient(90deg, transparent, rgba(185, 154, 95, 0.7), transparent);
+  background: var(--section-rule, linear-gradient(90deg, transparent, rgba(185, 154, 95, 0.7), transparent));
 }
 
-.section-decor {
+.section::after {
   position: absolute;
+  inset: 0;
   z-index: 0;
-  opacity: 0.14;
-  filter: saturate(0.78);
+  pointer-events: none;
+  content: "";
+  background: var(--section-overlay, rgba(255, 250, 240, 0.62));
 }
 
-.section > *:not(.section-decor) {
+.section > * {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-.decor-pavilion {
-  right: 5vw;
-  top: 76px;
-  width: min(310px, 32vw);
+.itinerary-section {
+  --section-bg: url("assets/bg/itinerary.png");
+  --section-base: #f6eddb;
+  --section-overlay: linear-gradient(180deg, rgba(255, 250, 240, 0.76), rgba(255, 250, 240, 0.7));
+  --section-heading: #1e261f;
+  --section-muted: rgba(30, 38, 31, 0.68);
+  --section-accent: #a07f43;
+  --card-bg: rgba(255, 250, 240, 0.88);
+  --card-border: rgba(38, 56, 43, 0.16);
 }
 
-.decor-leaf {
-  right: -24px;
-  top: 52px;
-  width: min(190px, 24vw);
-  opacity: 0.13;
-  transform: rotate(-10deg);
+.hotels-section {
+  --section-bg: url("assets/bg/hotels.png");
+  --section-base: #143225;
+  --section-overlay: linear-gradient(180deg, rgba(14, 34, 25, 0.66), rgba(14, 34, 25, 0.74));
+  --section-heading: #fffaf0;
+  --section-ink: #fffaf0;
+  --section-muted: rgba(255, 250, 240, 0.76);
+  --section-accent: #dcc384;
+  --section-rule: linear-gradient(90deg, transparent, rgba(220, 195, 132, 0.72), transparent);
+  --dot-bg: rgba(255, 250, 240, 0.3);
+  --dot-border: rgba(255, 250, 240, 0.64);
+  --dot-active: #dcc384;
+  --card-bg: rgba(255, 250, 240, 0.9);
+  --card-border: rgba(255, 250, 240, 0.28);
+  --card-ink: var(--ink);
 }
 
-.decor-water {
-  right: 8vw;
-  top: 84px;
-  width: 130px;
-  opacity: 0.2;
+.shopping-section {
+  --section-bg: url("assets/bg/shopping.png");
+  --section-base: #f8eddc;
+  --section-overlay: linear-gradient(180deg, rgba(255, 250, 240, 0.78), rgba(255, 250, 240, 0.72));
+  --section-heading: #243428;
+  --section-muted: rgba(30, 38, 31, 0.68);
+  --section-accent: #a56f4e;
+  --card-bg: rgba(255, 250, 240, 0.88);
+  --card-border: rgba(94, 58, 39, 0.16);
+}
+
+.food-section {
+  --section-bg: url("assets/bg/food.png");
+  --section-base: #173629;
+  --section-overlay: linear-gradient(180deg, rgba(14, 34, 25, 0.58), rgba(14, 34, 25, 0.68));
+  --section-heading: #fffaf0;
+  --section-ink: #fffaf0;
+  --section-muted: rgba(255, 250, 240, 0.76);
+  --section-accent: #dcc384;
+  --section-rule: linear-gradient(90deg, transparent, rgba(220, 195, 132, 0.72), transparent);
+  --dot-bg: rgba(255, 250, 240, 0.3);
+  --dot-border: rgba(255, 250, 240, 0.64);
+  --dot-active: #dcc384;
+  --card-bg: rgba(255, 250, 240, 0.9);
+  --card-border: rgba(255, 250, 240, 0.28);
+  --card-ink: var(--ink);
+  --card-muted: rgba(30, 38, 31, 0.72);
+}
+
+.tips-section {
+  --section-bg: url("assets/bg/tips.png");
+  --section-base: #f7efdd;
+  --section-overlay: linear-gradient(180deg, rgba(255, 250, 240, 0.78), rgba(255, 250, 240, 0.72));
+  --section-heading: #1e261f;
+  --section-muted: rgba(30, 38, 31, 0.68);
+  --section-accent: #a07f43;
+  --card-bg: rgba(255, 250, 240, 0.86);
+  --card-border: rgba(126, 94, 48, 0.16);
 }
 
 .section-head {
@@ -405,6 +456,7 @@ button {
 .section-head h2,
 .concert-copy h2 {
   margin: 0;
+  color: var(--section-heading, currentColor);
   font-family: var(--serif);
   font-size: 4.3rem;
   font-weight: 500;
@@ -414,7 +466,7 @@ button {
 .section-head p,
 .concert-lead {
   margin: 0;
-  color: rgba(30, 38, 31, 0.68);
+  color: var(--section-muted, rgba(30, 38, 31, 0.68));
   font-size: 1.02rem;
 }
 
@@ -505,9 +557,10 @@ button {
   flex: 0 0 100%;
   min-height: 480px;
   overflow: hidden;
-  border: 1px solid rgba(38, 56, 43, 0.14);
+  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
   border-radius: 8px;
-  background: rgba(255, 250, 240, 0.78);
+  color: var(--card-ink, var(--ink));
+  background: var(--card-bg, rgba(255, 250, 240, 0.78));
   box-shadow: none;
   scroll-snap-align: center;
   scroll-snap-stop: always;
@@ -559,14 +612,14 @@ button {
 
 .day-date {
   margin: 0 0 12px;
-  color: var(--gold);
+  color: var(--section-accent, var(--gold));
   font-size: 0.84rem;
   font-weight: 800;
 }
 
 .day-label {
   margin: 0 0 10px;
-  color: var(--coral);
+  color: var(--section-emphasis, var(--coral));
   font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -595,17 +648,17 @@ button {
   grid-template-columns: 116px minmax(0, 1fr);
   gap: 18px;
   padding-bottom: 14px;
-  border-bottom: 1px solid rgba(38, 56, 43, 0.11);
+  border-bottom: 1px solid var(--card-line, rgba(38, 56, 43, 0.11));
 }
 
 .timeline time {
-  color: var(--coral);
+  color: var(--section-emphasis, var(--coral));
   font-weight: 800;
   line-height: 1.25;
 }
 
 .timeline span {
-  color: rgba(30, 38, 31, 0.74);
+  color: var(--card-muted, rgba(30, 38, 31, 0.74));
 }
 
 .note-row {
@@ -617,15 +670,9 @@ button {
 
 .note-row span {
   color: var(--olive);
-  border-color: rgba(38, 56, 43, 0.16);
-  background: rgba(185, 154, 95, 0.12);
+  border-color: var(--chip-border, rgba(38, 56, 43, 0.16));
+  background: var(--chip-bg, rgba(185, 154, 95, 0.12));
   backdrop-filter: none;
-}
-
-.hotels-section {
-  background:
-    linear-gradient(180deg, rgba(237, 242, 234, 0.88), rgba(255, 250, 240, 0.9)),
-    var(--paper);
 }
 
 .hotel-grid {
@@ -655,9 +702,10 @@ button {
   flex: 0 0 100%;
   min-height: 480px;
   overflow: hidden;
-  border: 1px solid rgba(38, 56, 43, 0.14);
+  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
   border-radius: 8px;
-  background: rgba(255, 250, 240, 0.78);
+  color: var(--card-ink, var(--ink));
+  background: var(--card-bg, rgba(255, 250, 240, 0.78));
   scroll-snap-align: center;
   scroll-snap-stop: always;
   animation: panelIn 280ms ease;
@@ -672,7 +720,7 @@ button {
 
 .hotel-card p:not(.label) {
   margin: 14px 0 0;
-  color: rgba(30, 38, 31, 0.72);
+  color: var(--card-muted, rgba(30, 38, 31, 0.72));
 }
 
 .map-link {
@@ -709,16 +757,10 @@ button {
 
 .feature-list li {
   padding: 7px 10px;
-  border: 1px solid rgba(38, 56, 43, 0.14);
+  border: 1px solid var(--chip-border, rgba(38, 56, 43, 0.14));
   border-radius: 999px;
   color: var(--moss);
   font-size: 0.82rem;
-}
-
-.shopping-section {
-  background:
-    linear-gradient(180deg, rgba(255, 250, 240, 0.82), rgba(246, 239, 225, 0.8)),
-    var(--ivory);
 }
 
 .tab-panels {
@@ -741,9 +783,10 @@ button {
   min-height: 480px;
   overflow: hidden;
   padding: 0;
-  border: 1px solid rgba(38, 56, 43, 0.14);
+  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
   border-radius: 8px;
-  background: rgba(255, 250, 240, 0.78);
+  color: var(--card-ink, var(--ink));
+  background: var(--card-bg, rgba(255, 250, 240, 0.78));
   box-shadow: none;
   scroll-snap-align: center;
   scroll-snap-stop: always;
@@ -762,7 +805,7 @@ button {
 
 .panel-copy p:not(.label) {
   margin: 14px 0 0;
-  color: rgba(30, 38, 31, 0.7);
+  color: var(--card-muted, rgba(30, 38, 31, 0.7));
 }
 
 .image-row {
@@ -840,12 +883,6 @@ button {
   border-radius: 0;
 }
 
-.food-section {
-  background:
-    linear-gradient(180deg, rgba(237, 242, 234, 0.88), rgba(255, 250, 240, 0.92)),
-    var(--paper);
-}
-
 .food-grid {
   display: flex;
   gap: 0;
@@ -868,9 +905,10 @@ button {
   flex: 0 0 100%;
   min-height: 300px;
   overflow: hidden;
-  border: 1px solid rgba(38, 56, 43, 0.14);
+  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
   border-radius: 8px;
-  background: rgba(255, 250, 240, 0.78);
+  color: var(--card-ink, var(--ink));
+  background: var(--card-bg, rgba(255, 250, 240, 0.78));
   scroll-snap-align: center;
   scroll-snap-stop: always;
 }
@@ -900,7 +938,7 @@ button {
 
 .food-card p:not(.label) {
   margin: 14px 0 0;
-  color: rgba(30, 38, 31, 0.7);
+  color: var(--card-muted, rgba(30, 38, 31, 0.7));
 }
 
 .food-info {
@@ -914,18 +952,18 @@ button {
   grid-template-columns: 46px minmax(0, 1fr);
   gap: 10px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(38, 56, 43, 0.1);
+  border-bottom: 1px solid var(--card-line, rgba(38, 56, 43, 0.1));
 }
 
 .food-info dt {
-  color: var(--gold);
+  color: var(--section-accent, var(--gold));
   font-size: 0.8rem;
   font-weight: 800;
 }
 
 .food-info dd {
   margin: 0;
-  color: rgba(30, 38, 31, 0.76);
+  color: var(--card-muted, rgba(30, 38, 31, 0.76));
   font-size: 0.9rem;
 }
 
@@ -938,6 +976,10 @@ button {
 
 .concert-section::before {
   background: linear-gradient(90deg, transparent, rgba(202, 115, 190, 0.6), rgba(185, 154, 95, 0.6), transparent);
+}
+
+.concert-section::after {
+  display: none;
 }
 
 .concert-layout {
@@ -1191,10 +1233,6 @@ button {
   line-height: 1.35;
 }
 
-.tips-section {
-  background: linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(237, 242, 234, 0.94));
-}
-
 .tips-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1202,9 +1240,10 @@ button {
 }
 
 .tip-card {
-  border: 1px solid rgba(38, 56, 43, 0.14);
+  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
   border-radius: 8px;
-  background: rgba(255, 250, 240, 0.74);
+  color: var(--card-ink, var(--ink));
+  background: var(--card-bg, rgba(255, 250, 240, 0.74));
   overflow: hidden;
   padding: 20px 18px 18px;
 }
@@ -1218,7 +1257,7 @@ button {
 
 .tip-card p {
   margin: 0;
-  color: rgba(30, 38, 31, 0.72);
+  color: var(--card-muted, rgba(30, 38, 31, 0.72));
 }
 
 .site-footer {
@@ -1493,18 +1532,6 @@ button {
   .section::before {
     left: 18px;
     right: 18px;
-  }
-
-  .section-decor {
-    opacity: 0.1;
-  }
-
-  .decor-pavilion {
-    width: 210px;
-  }
-
-  .decor-leaf {
-    width: 118px;
   }
 
   .section-head h2,
