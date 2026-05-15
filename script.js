@@ -109,68 +109,65 @@ const navObserver = new IntersectionObserver(
 
 sections.forEach((section) => navObserver.observe(section));
 
-const hero = document.querySelector(".hero");
-const heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
-const heroDots = Array.from(document.querySelectorAll(".hero-dot"));
-let heroIndex = 0;
-let heroTimer = null;
-
-const setHeroSlide = (index) => {
-  heroIndex = (index + heroSlides.length) % heroSlides.length;
-  heroSlides.forEach((slide, slideIndex) => {
-    slide.classList.toggle("is-active", slideIndex === heroIndex);
-  });
-  heroDots.forEach((dot, dotIndex) => {
-    const active = dotIndex === heroIndex;
-    dot.classList.toggle("is-active", active);
-    dot.toggleAttribute("aria-current", active);
-  });
-};
-
-const startHeroTimer = () => {
-  window.clearInterval(heroTimer);
-  heroTimer = window.setInterval(() => setHeroSlide(heroIndex + 1), 5200);
-};
-
-heroDots.forEach((dot) => {
-  dot.addEventListener("click", () => {
-    setHeroSlide(Number(dot.dataset.slide));
-    startHeroTimer();
-  });
-});
-
-let heroStartX = 0;
-let heroTracking = false;
-
-hero.addEventListener(
-  "pointerdown",
-  (event) => {
-    heroTracking = true;
-    heroStartX = event.clientX;
-  },
-  { passive: true }
-);
-
-hero.addEventListener(
-  "pointerup",
-  (event) => {
-    if (!heroTracking) return;
-    const distance = event.clientX - heroStartX;
-    heroTracking = false;
-    if (Math.abs(distance) < 48) return;
-    setHeroSlide(distance < 0 ? heroIndex + 1 : heroIndex - 1);
-    startHeroTimer();
-  },
-  { passive: true }
-);
-
-startHeroTimer();
-
 const dayTrack = document.querySelector(".day-track");
 const dayTabs = Array.from(document.querySelectorAll(".day-tab"));
 const dayPages = Array.from(document.querySelectorAll(".day-page"));
 
 setupScrollDots({ container: dayTrack, items: dayPages, label: "日程" });
+
+const dayModal = document.createElement("div");
+dayModal.className = "day-modal";
+dayModal.hidden = true;
+dayModal.innerHTML = `
+  <div class="day-modal__panel" role="dialog" aria-modal="true" aria-labelledby="day-modal-title">
+    <button type="button" class="day-modal__close" aria-label="关闭">×</button>
+    <div class="day-modal__body"></div>
+  </div>
+`;
+document.body.append(dayModal);
+
+const dayModalBody = dayModal.querySelector(".day-modal__body");
+const closeDayModal = () => {
+  dayModal.hidden = true;
+  dayModalBody.replaceChildren();
+  document.body.style.removeProperty("overflow");
+};
+
+dayModal.querySelector(".day-modal__close").addEventListener("click", closeDayModal);
+dayModal.addEventListener("click", (event) => {
+  if (event.target === dayModal) closeDayModal();
+});
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !dayModal.hidden) closeDayModal();
+});
+
+dayPages.forEach((page) => {
+  const copy = page.querySelector(".day-copy");
+  const title = copy?.querySelector("h3");
+  const date = copy?.querySelector(".day-date");
+  const timeline = copy?.querySelector(".timeline");
+  const notes = copy?.querySelector(".note-row");
+  if (!copy || !title || !date || !timeline) return;
+
+  const trigger = document.createElement("button");
+  trigger.type = "button";
+  trigger.className = "day-detail-trigger";
+  trigger.textContent = "查看详情";
+  trigger.addEventListener("click", () => {
+    const heading = document.createElement("div");
+    heading.className = "day-modal__head";
+    const modalTitle = title.cloneNode(true);
+    modalTitle.id = "day-modal-title";
+    heading.append(date.cloneNode(true), modalTitle);
+    dayModalBody.replaceChildren(heading, timeline.cloneNode(true));
+    if (notes) dayModalBody.append(notes.cloneNode(true));
+    dayModal.hidden = false;
+    document.body.style.overflow = "hidden";
+    dayModal.querySelector(".day-modal__close").focus();
+  });
+
+  copy.append(trigger);
+});
 
 const setActiveDay = (index) => {
   dayTabs.forEach((tab, tabIndex) => {
@@ -244,27 +241,6 @@ const foodGrid = document.querySelector(".food-grid");
 const foodCards = Array.from(document.querySelectorAll(".food-card"));
 
 setupScrollDots({ container: foodGrid, items: foodCards, label: "美食" });
-
-const splitGalleries = Array.from(document.querySelectorAll(".split-gallery"));
-
-splitGalleries.forEach((gallery) => {
-  const images = Array.from(gallery.querySelectorAll("img"));
-  if (images.length < 2) return;
-
-  let galleryIndex = 0;
-  images.forEach((image, imageIndex) => {
-    image.classList.toggle("is-active", imageIndex === galleryIndex);
-  });
-
-  if (reduceMotion) return;
-
-  window.setInterval(() => {
-    galleryIndex = (galleryIndex + 1) % images.length;
-    images.forEach((image, imageIndex) => {
-      image.classList.toggle("is-active", imageIndex === galleryIndex);
-    });
-  }, 4200);
-});
 
 const xgAlbumMount = document.querySelector("[data-xg-albums]");
 const xgAlbums = [
