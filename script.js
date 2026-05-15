@@ -4,6 +4,19 @@ const sections = navLinks
   .filter(Boolean);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const heroVideo = document.querySelector(".hero-video");
+const initialHash = window.location.hash;
+
+if (initialHash) {
+  history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  window.addEventListener(
+    "load",
+    () => {
+      window.setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: "auto" }), 0);
+    },
+    { once: true }
+  );
+}
 
 const playHeroVideo = () => {
   if (!heroVideo || document.visibilityState === "hidden") return;
@@ -87,19 +100,6 @@ const setupScrollDots = ({ container, items, label }) => {
   container.insertAdjacentElement("afterend", dots);
   setActive();
 };
-
-const scrollToRequestedSection = () => {
-  const params = new URLSearchParams(window.location.search);
-  const requested = params.get("section");
-  const selector = requested ? `#${requested}` : window.location.hash;
-  if (!selector) return;
-  const target = document.querySelector(selector);
-  if (target) {
-    window.setTimeout(() => target.scrollIntoView({ block: "start" }), 120);
-  }
-};
-
-window.addEventListener("load", scrollToRequestedSection);
 
 navLinks.forEach((link) => {
   link.addEventListener("click", () => {
@@ -274,6 +274,10 @@ const foodGrid = document.querySelector(".food-grid");
 const foodCards = Array.from(document.querySelectorAll(".food-card"));
 
 setupScrollDots({ container: foodGrid, items: foodCards, label: "美食" });
+
+const tipCards = Array.from(document.querySelectorAll(".tip-card"));
+
+setupScrollDots({ container: document.querySelector(".tips-grid"), items: tipCards, label: "注意事项" });
 
 const xgAlbumMount = document.querySelector("[data-xg-albums]");
 const xgAlbums = [
