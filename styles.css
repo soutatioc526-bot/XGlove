@@ -176,6 +176,8 @@ strong {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: translateZ(0);
+  will-change: transform;
   background: var(--olive);
 }
 
@@ -190,7 +192,7 @@ strong {
   position: relative;
   z-index: 2;
   display: grid;
-  gap: 18px;
+  gap: 20px;
   width: min(760px, 100%);
   padding-bottom: 88px;
 }
@@ -211,13 +213,16 @@ strong {
 .hero .issue {
   margin: 0;
   color: rgba(243, 238, 231, 0.76);
+  font-size: clamp(0.78rem, 1.2vw, 0.92rem);
+  letter-spacing: 0.22em;
+  line-height: 1.45;
 }
 
 .hero h1 {
   display: grid;
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(3.2rem, 8.4vw, 5.8rem);
+  font-size: clamp(4.4rem, 11vw, 8rem);
   font-weight: 400;
   line-height: 1.16;
   letter-spacing: 0.016em;
@@ -257,7 +262,7 @@ strong {
   width: 9px;
   height: 9px;
   padding: 0;
-  border: 1px solid var(--dot-border, rgba(239, 232, 213, 0.38));
+  border: 0;
   border-radius: 50%;
   background: var(--dot-bg, rgba(239, 232, 213, 0.24));
   cursor: pointer;
@@ -265,7 +270,6 @@ strong {
 }
 
 .scroll-dot.is-active {
-  border-color: var(--dot-active, var(--gold));
   background: var(--dot-active, var(--gold));
   transform: scale(1.18);
 }
@@ -579,8 +583,8 @@ strong {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 28px;
-  padding: clamp(24px, 3.6vw, 34px);
+  gap: 22px;
+  padding: clamp(28px, 4vw, 44px);
 }
 
 .day-page .timeline,
@@ -591,11 +595,11 @@ strong {
 .day-date {
   margin: 0;
   color: var(--section-accent, var(--gold));
-  font-family: var(--label);
-  font-size: 10px;
+  font-family: var(--serif);
+  font-size: clamp(1.12rem, 2.1vw, 1.42rem);
   font-weight: 400;
-  letter-spacing: 2px;
-  line-height: 1.45;
+  letter-spacing: 0.08em;
+  line-height: 1.55;
 }
 
 .day-copy h3,
@@ -609,18 +613,25 @@ strong {
   letter-spacing: 0.021em;
 }
 
+.linked-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.36em;
+  flex-wrap: wrap;
+}
+
 .day-detail-trigger {
   align-self: flex-start;
-  min-height: 38px;
+  min-height: 34px;
   margin-top: 0;
-  padding: 8px 16px;
+  padding: 8px 14px;
   border: 1px solid var(--chip-border, rgba(239, 232, 213, 0.18));
   border-radius: 0;
   color: var(--chip-ink, var(--ivory));
   background: var(--chip-bg, rgba(210, 180, 111, 0.13));
   cursor: pointer;
   font-family: var(--label);
-  font-size: 0.82rem;
+  font-size: 0.76rem;
   font-weight: 400;
   letter-spacing: 0.12em;
   transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
@@ -799,20 +810,20 @@ strong {
 }
 
 .map-link {
-  align-self: flex-start;
+  align-self: baseline;
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  min-height: 38px;
-  margin-top: 18px;
+  width: 18px;
+  height: 20px;
+  min-height: 20px;
+  margin: 0;
   padding: 0;
-  border: 1px solid var(--chip-border, rgba(239, 232, 213, 0.18));
+  border: 0;
   border-radius: 0;
   color: var(--chip-ink, var(--ivory));
-  background: var(--chip-bg, rgba(210, 180, 111, 0.13));
+  background: transparent;
   font-family: var(--label);
   font-size: 0;
   font-weight: 400;
@@ -822,9 +833,9 @@ strong {
 
 .map-link::before,
 .map-chip::before {
-  width: 13px;
-  height: 13px;
-  border: 1px solid currentColor;
+  width: 12px;
+  height: 12px;
+  border: 1.4px solid currentColor;
   border-radius: 50% 50% 50% 0;
   content: "";
   transform: rotate(-45deg);
@@ -844,8 +855,8 @@ strong {
 }
 
 .map-link:hover {
-  border-color: rgba(210, 180, 111, 0.72);
-  background: rgba(210, 180, 111, 0.2);
+  color: var(--section-accent, var(--gold));
+  background: transparent;
   transform: translateY(-1px);
 }
 
@@ -960,14 +971,14 @@ strong {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  min-height: 26px;
+  width: 18px;
+  height: 20px;
+  min-height: 20px;
   padding: 0;
-  border: 1px solid rgba(255, 250, 240, 0.34);
+  border: 0;
   border-radius: 0;
   color: var(--ivory);
-  background: rgba(255, 250, 240, 0.13);
+  background: transparent;
   font-family: var(--label);
   font-size: 0;
   font-weight: 400;
@@ -1141,13 +1152,11 @@ strong {
 
 .concert-map-link {
   color: var(--ivory);
-  border-color: rgba(255, 250, 240, 0.22);
-  background: rgba(255, 250, 240, 0.08);
+  background: transparent;
 }
 
 .concert-map-link:hover {
-  border-color: rgba(220, 195, 132, 0.72);
-  background: rgba(220, 195, 132, 0.14);
+  background: transparent;
 }
 
 .info-list {
@@ -1478,7 +1487,7 @@ strong {
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 9vw, 4.8rem);
+    font-size: clamp(4rem, 12vw, 6.2rem);
   }
 
   .hero-content {
@@ -1587,7 +1596,13 @@ strong {
   }
 
   .hero h1 {
-    font-size: 2.86rem;
+    font-size: clamp(4rem, 18vw, 4.75rem);
+  }
+
+  .hero .issue {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    line-height: 1.5;
   }
 
   .hero-meta {
@@ -1595,6 +1610,7 @@ strong {
   }
 
   .hero-content {
+    gap: 16px;
     padding-bottom: 74px;
   }
 
@@ -1626,7 +1642,13 @@ strong {
   }
 
   .day-copy {
-    padding: 26px 20px 30px;
+    gap: 18px;
+    padding: 30px 24px 34px;
+  }
+
+  .day-date {
+    font-size: 1.08rem;
+    letter-spacing: 0.06em;
   }
 
   .day-copy h3,

@@ -3,6 +3,42 @@ const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute("href")))
   .filter(Boolean);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const heroVideo = document.querySelector(".hero-video");
+
+const playHeroVideo = () => {
+  if (!heroVideo || document.visibilityState === "hidden") return;
+
+  heroVideo.muted = true;
+  heroVideo.defaultMuted = true;
+  heroVideo.playsInline = true;
+  heroVideo.setAttribute("muted", "");
+  heroVideo.setAttribute("playsinline", "");
+  heroVideo.setAttribute("webkit-playsinline", "");
+  heroVideo.setAttribute("x5-playsinline", "");
+
+  if (heroVideo.readyState === 0) {
+    heroVideo.load();
+  }
+
+  const playAttempt = heroVideo.play();
+  if (playAttempt?.catch) {
+    playAttempt.catch(() => {});
+  }
+};
+
+["DOMContentLoaded", "load", "pageshow", "focus"].forEach((eventName) => {
+  window.addEventListener(eventName, playHeroVideo);
+});
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    playHeroVideo();
+  }
+});
+
+document.addEventListener("WeixinJSBridgeReady", playHeroVideo, false);
+document.addEventListener("touchstart", playHeroVideo, { once: true, passive: true });
+playHeroVideo();
 
 const setupScrollDots = ({ container, items, label }) => {
   if (!container || items.length < 2) return;
