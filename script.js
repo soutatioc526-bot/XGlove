@@ -143,11 +143,9 @@ window.addEventListener("keydown", (event) => {
 
 dayPages.forEach((page) => {
   const copy = page.querySelector(".day-copy");
-  const title = copy?.querySelector("h3");
   const date = copy?.querySelector(".day-date");
   const timeline = copy?.querySelector(".timeline");
-  const notes = copy?.querySelector(".note-row");
-  if (!copy || !title || !date || !timeline) return;
+  if (!copy || !date || !timeline) return;
 
   const trigger = document.createElement("button");
   trigger.type = "button";
@@ -156,11 +154,10 @@ dayPages.forEach((page) => {
   trigger.addEventListener("click", () => {
     const heading = document.createElement("div");
     heading.className = "day-modal__head";
-    const modalTitle = title.cloneNode(true);
-    modalTitle.id = "day-modal-title";
-    heading.append(date.cloneNode(true), modalTitle);
+    const modalDate = date.cloneNode(true);
+    modalDate.id = "day-modal-title";
+    heading.append(modalDate);
     dayModalBody.replaceChildren(heading, timeline.cloneNode(true));
-    if (notes) dayModalBody.append(notes.cloneNode(true));
     dayModal.hidden = false;
     document.body.style.overflow = "hidden";
     dayModal.querySelector(".day-modal__close").focus();
