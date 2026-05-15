@@ -1,21 +1,25 @@
 :root {
-  --ivory: #efe8d5;
-  --paper: #13241b;
-  --ink: #f4eddc;
-  --olive: #102019;
-  --moss: #9ba98e;
-  --gold: #d2b46f;
-  --coral: #d08b7d;
-  --teal: #7bb0a3;
-  --night: #07110d;
-  --line: rgba(239, 232, 213, 0.16);
-  --shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
-  --sans: "Sarabun", "Anchan", "Noto Sans Thai", "Aptos", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-  --serif: "Anchan", "Noto Serif Thai", "Noto Serif SC", "Songti SC", Georgia, "Times New Roman", serif;
+  --ivory: #f3eee7;
+  --paper: #0b1712;
+  --ink: #f3eee7;
+  --olive: #0f2119;
+  --moss: rgba(243, 238, 231, 0.68);
+  --gold: #d3bf88;
+  --coral: #c89b83;
+  --teal: #8fa89a;
+  --night: #06100c;
+  --line: rgba(243, 238, 231, 0.14);
+  --shadow: none;
+  --sans: Meiryo, "Meiryo", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic Pro W3", Osaka, "MS PGothic", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --serif: "Cormorant Garamond", "Shippori Mincho", "Noto Serif SC", "Songti SC", "SimSun", "Times New Roman", serif;
+  --label: Meiryo, "Meiryo", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic Pro W3", Osaka, "MS PGothic", "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+  font-feature-settings: normal;
 }
 
 html {
@@ -34,10 +38,11 @@ body {
     radial-gradient(circle at 82% 18%, rgba(210, 180, 111, 0.11), transparent 30%),
     linear-gradient(180deg, #07110d 0%, #102019 44%, #07110d 100%);
   background-size: auto;
-  font-family: var(--sans);
-  font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: 0;
+  font-family: var(--serif);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.8px;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -83,6 +88,11 @@ button {
   color: inherit;
 }
 
+b,
+strong {
+  font-weight: 400;
+}
+
 .top-nav {
   position: fixed !important;
   left: 50%;
@@ -90,17 +100,17 @@ button {
   bottom: calc(18px + env(safe-area-inset-bottom));
   z-index: 30;
   display: flex;
-  gap: 4px;
+  gap: 0;
   width: min(calc(100vw - 32px), 560px);
   min-width: 0;
-  padding: 4px;
+  padding: 0;
   overflow-x: auto;
   border: 1px solid rgba(239, 232, 213, 0.18);
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--ivory);
-  background: rgba(7, 17, 13, 0.78);
-  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(18px);
+  background: rgba(6, 16, 12, 0.88);
+  box-shadow: none;
+  backdrop-filter: blur(12px);
   pointer-events: auto;
   scrollbar-width: none;
   transform: translateX(-50%);
@@ -116,14 +126,16 @@ button {
   flex: 1 0 auto;
   min-height: 36px;
   padding: 8px 14px;
-  border-radius: 999px;
+  border-radius: 0;
   text-align: center;
-  font-size: 0.86rem;
+  font-family: var(--label);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
   transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .top-nav a.is-active {
-  color: #07110d;
+  color: #06100c;
   background: var(--gold);
 }
 
@@ -145,8 +157,8 @@ button {
   display: grid;
   align-items: end;
   overflow: hidden;
-  padding: 128px clamp(22px, 6vw, 76px) 62px;
-  color: #fffaf0;
+  padding: 128px clamp(22px, 6vw, 76px) 76px;
+  color: var(--ivory);
   isolation: isolate;
 }
 
@@ -168,40 +180,44 @@ button {
   z-index: -2;
   background:
     linear-gradient(90deg, rgba(22, 27, 23, 0.78), rgba(22, 27, 23, 0.24) 44%, rgba(22, 27, 23, 0.34)),
-    linear-gradient(0deg, rgba(22, 27, 23, 0.88), transparent 48%, rgba(22, 27, 23, 0.26));
+    linear-gradient(0deg, rgba(6, 16, 12, 0.9), transparent 48%, rgba(6, 16, 12, 0.32));
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  width: min(840px, 100%);
-  padding-bottom: 82px;
+  display: grid;
+  gap: 18px;
+  width: min(760px, 100%);
+  padding-bottom: 88px;
 }
 
 .issue,
 .section-kicker,
 .label {
-  margin: 0 0 14px;
+  margin: 0 0 18px;
   color: var(--section-accent, var(--gold));
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-family: var(--label);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1.45;
   text-transform: uppercase;
+}
+
+.hero .issue {
+  margin: 0;
+  color: rgba(243, 238, 231, 0.76);
 }
 
 .hero h1 {
   display: grid;
-  gap: 8px;
   margin: 0;
   font-family: var(--serif);
-  font-size: 7rem;
-  font-weight: 500;
-  line-height: 0.95;
-}
-
-.hero h1 [lang="th"] {
-  font-family: "Noto Serif Thai", "Anchan", var(--serif);
-  font-size: clamp(2.1rem, 5vw, 4.9rem);
-  line-height: 1.02;
+  font-size: clamp(3.2rem, 8.4vw, 5.8rem);
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: 0.016em;
 }
 
 .hero-meta {
@@ -218,7 +234,7 @@ button {
   min-height: 34px;
   padding: 7px 12px;
   border: 1px solid rgba(255, 250, 240, 0.44);
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 250, 240, 0.08);
   backdrop-filter: blur(12px);
   font-size: 0.84rem;
@@ -258,7 +274,7 @@ button {
 
 .section {
   position: relative;
-  padding: 98px clamp(22px, 6vw, 76px);
+  padding: 112px clamp(22px, 7vw, 92px);
   overflow: hidden;
   isolation: isolate;
   color: var(--section-ink, var(--ink));
@@ -267,13 +283,13 @@ button {
 
 .section::before {
   position: absolute;
-  left: clamp(22px, 6vw, 76px);
-  right: clamp(22px, 6vw, 76px);
+  left: clamp(22px, 7vw, 92px);
+  right: clamp(22px, 7vw, 92px);
   top: 0;
   z-index: 1;
   height: 1px;
   content: "";
-  background: var(--section-rule, linear-gradient(90deg, transparent, rgba(185, 154, 95, 0.7), transparent));
+  background: var(--section-rule, rgba(243, 238, 231, 0.14));
 }
 
 .section > * {
@@ -282,87 +298,87 @@ button {
 }
 
 .itinerary-section {
-  --section-bg: #102019;
+  --section-bg: #08130f;
   --section-heading: #f4eddc;
   --section-ink: #f4eddc;
-  --section-muted: rgba(239, 232, 213, 0.68);
-  --section-accent: #d2b46f;
-  --section-emphasis: #d08b7d;
-  --card-bg: rgba(18, 36, 27, 0.92);
-  --card-border: rgba(239, 232, 213, 0.14);
+  --section-muted: rgba(243, 238, 231, 0.64);
+  --section-accent: #d3bf88;
+  --section-emphasis: #c89b83;
+  --card-bg: rgba(243, 238, 231, 0.035);
+  --card-border: transparent;
   --card-ink: #f4eddc;
-  --card-muted: rgba(239, 232, 213, 0.7);
-  --card-line: rgba(239, 232, 213, 0.12);
-  --chip-bg: rgba(210, 180, 111, 0.13);
-  --chip-border: rgba(239, 232, 213, 0.18);
+  --card-muted: rgba(243, 238, 231, 0.68);
+  --card-line: rgba(243, 238, 231, 0.12);
+  --chip-bg: rgba(243, 238, 231, 0.08);
+  --chip-border: rgba(243, 238, 231, 0.2);
   --chip-ink: #efe8d5;
 }
 
 .hotels-section {
-  --section-bg: #0d1b14;
+  --section-bg: #0b1812;
   --section-heading: #f4eddc;
   --section-ink: #f4eddc;
-  --section-muted: rgba(239, 232, 213, 0.68);
-  --section-accent: #d2b46f;
-  --section-emphasis: #d08b7d;
-  --card-bg: rgba(15, 31, 23, 0.92);
-  --card-border: rgba(239, 232, 213, 0.14);
+  --section-muted: rgba(243, 238, 231, 0.64);
+  --section-accent: #d3bf88;
+  --section-emphasis: #c89b83;
+  --card-bg: rgba(243, 238, 231, 0.045);
+  --card-border: transparent;
   --card-ink: #f4eddc;
-  --card-muted: rgba(239, 232, 213, 0.7);
-  --card-line: rgba(239, 232, 213, 0.12);
-  --chip-bg: rgba(210, 180, 111, 0.13);
-  --chip-border: rgba(239, 232, 213, 0.18);
+  --card-muted: rgba(243, 238, 231, 0.68);
+  --card-line: rgba(243, 238, 231, 0.12);
+  --chip-bg: rgba(243, 238, 231, 0.08);
+  --chip-border: rgba(243, 238, 231, 0.2);
   --chip-ink: #efe8d5;
 }
 
 .shopping-section {
-  --section-bg: #13251c;
+  --section-bg: #101f18;
   --section-heading: #f4eddc;
   --section-ink: #f4eddc;
-  --section-muted: rgba(239, 232, 213, 0.68);
-  --section-accent: #d2b46f;
-  --section-emphasis: #d08b7d;
-  --card-bg: rgba(18, 35, 27, 0.92);
-  --card-border: rgba(239, 232, 213, 0.14);
+  --section-muted: rgba(243, 238, 231, 0.64);
+  --section-accent: #d3bf88;
+  --section-emphasis: #c89b83;
+  --card-bg: rgba(243, 238, 231, 0.04);
+  --card-border: transparent;
   --card-ink: #f4eddc;
-  --card-muted: rgba(239, 232, 213, 0.7);
-  --card-line: rgba(239, 232, 213, 0.12);
-  --chip-bg: rgba(210, 180, 111, 0.13);
-  --chip-border: rgba(239, 232, 213, 0.18);
+  --card-muted: rgba(243, 238, 231, 0.68);
+  --card-line: rgba(243, 238, 231, 0.12);
+  --chip-bg: rgba(243, 238, 231, 0.08);
+  --chip-border: rgba(243, 238, 231, 0.2);
   --chip-ink: #efe8d5;
 }
 
 .food-section {
-  --section-bg: #101f18;
+  --section-bg: #0a1510;
   --section-heading: #f4eddc;
   --section-ink: #f4eddc;
-  --section-muted: rgba(239, 232, 213, 0.68);
-  --section-accent: #d2b46f;
-  --section-emphasis: #d08b7d;
-  --card-bg: rgba(17, 33, 25, 0.92);
-  --card-border: rgba(239, 232, 213, 0.14);
+  --section-muted: rgba(243, 238, 231, 0.64);
+  --section-accent: #d3bf88;
+  --section-emphasis: #c89b83;
+  --card-bg: rgba(243, 238, 231, 0.04);
+  --card-border: transparent;
   --card-ink: #f4eddc;
-  --card-muted: rgba(239, 232, 213, 0.7);
-  --card-line: rgba(239, 232, 213, 0.12);
-  --chip-bg: rgba(210, 180, 111, 0.13);
-  --chip-border: rgba(239, 232, 213, 0.18);
+  --card-muted: rgba(243, 238, 231, 0.68);
+  --card-line: rgba(243, 238, 231, 0.12);
+  --chip-bg: rgba(243, 238, 231, 0.08);
+  --chip-border: rgba(243, 238, 231, 0.2);
   --chip-ink: #efe8d5;
 }
 
 .tips-section {
-  --section-bg: #0b1712;
+  --section-bg: #08130f;
   --section-heading: #f4eddc;
   --section-ink: #f4eddc;
-  --section-muted: rgba(239, 232, 213, 0.68);
-  --section-accent: #d2b46f;
-  --section-emphasis: #d08b7d;
-  --card-bg: rgba(15, 29, 22, 0.92);
-  --card-border: rgba(239, 232, 213, 0.14);
+  --section-muted: rgba(243, 238, 231, 0.64);
+  --section-accent: #d3bf88;
+  --section-emphasis: #c89b83;
+  --card-bg: rgba(243, 238, 231, 0.04);
+  --card-border: transparent;
   --card-ink: #f4eddc;
-  --card-muted: rgba(239, 232, 213, 0.7);
-  --card-line: rgba(239, 232, 213, 0.12);
-  --chip-bg: rgba(210, 180, 111, 0.13);
-  --chip-border: rgba(239, 232, 213, 0.18);
+  --card-muted: rgba(243, 238, 231, 0.68);
+  --card-line: rgba(243, 238, 231, 0.12);
+  --chip-bg: rgba(243, 238, 231, 0.08);
+  --chip-border: rgba(243, 238, 231, 0.2);
   --chip-ink: #efe8d5;
 }
 
@@ -371,7 +387,7 @@ button {
   grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.55fr);
   gap: 44px;
   align-items: end;
-  margin-bottom: 34px;
+  margin-bottom: 56px;
 }
 
 .section-head:not(:has(p)) {
@@ -405,16 +421,17 @@ button {
   margin: 0;
   color: var(--section-heading, currentColor);
   font-family: var(--serif);
-  font-size: 4.3rem;
-  font-weight: 500;
-  line-height: 0.98;
+  font-size: clamp(2.2rem, 4.2vw, 3.1rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.016em;
 }
 
 .section-head p,
 .concert-lead {
   margin: 0;
-  color: var(--section-muted, rgba(30, 38, 31, 0.68));
-  font-size: 1.02rem;
+  color: var(--section-muted, rgba(243, 238, 231, 0.64));
+  font-size: 0.96rem;
 }
 
 .day-switcher {
@@ -434,9 +451,11 @@ button {
   flex: 0 0 auto;
   min-height: 48px;
   border: 1px solid rgba(239, 232, 213, 0.18);
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--section-ink, var(--ink));
   background: rgba(239, 232, 213, 0.08);
+  font-family: var(--label);
+  letter-spacing: 0.12em;
   cursor: pointer;
   transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
@@ -448,7 +467,7 @@ button {
   min-width: 0;
   padding: 10px 16px;
   text-align: left;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 .content-tab {
@@ -458,12 +477,12 @@ button {
 .day-tab span {
   color: var(--gold);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .day-tab strong {
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .day-tab:hover,
@@ -477,7 +496,7 @@ button {
   color: #07110d;
   border-color: var(--gold);
   background: var(--gold);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+  box-shadow: none;
 }
 
 .day-tab.is-active span {
@@ -505,8 +524,8 @@ button {
   flex: 0 0 100%;
   min-height: 480px;
   overflow: hidden;
-  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
-  border-radius: 8px;
+  border: 1px solid var(--card-border, transparent);
+  border-radius: 0;
   color: var(--card-ink, var(--ink));
   background: var(--card-bg, rgba(255, 250, 240, 0.78));
   box-shadow: none;
@@ -564,18 +583,13 @@ button {
 }
 
 .day-date {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   color: var(--section-accent, var(--gold));
-  font-size: 0.84rem;
-  font-weight: 800;
-}
-
-.day-label {
-  margin: 0 0 10px;
-  color: var(--section-emphasis, var(--coral));
-  font-size: 0.78rem;
-  font-weight: 900;
-  text-transform: uppercase;
+  font-family: var(--label);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1.45;
 }
 
 .day-copy h3,
@@ -583,9 +597,10 @@ button {
 .panel-copy h3 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(2.05rem, 3.2vw, 2.42rem);
-  font-weight: 500;
-  line-height: 1.05;
+  font-size: clamp(1.65rem, 2.4vw, 2.15rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.021em;
 }
 
 .day-detail-trigger {
@@ -594,12 +609,14 @@ button {
   margin-top: 24px;
   padding: 8px 16px;
   border: 1px solid var(--chip-border, rgba(239, 232, 213, 0.18));
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--chip-ink, var(--ivory));
   background: var(--chip-bg, rgba(210, 180, 111, 0.13));
   cursor: pointer;
-  font-size: 0.86rem;
-  font-weight: 800;
+  font-family: var(--label);
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
 
@@ -637,11 +654,11 @@ button {
   --chip-bg: rgba(210, 180, 111, 0.13);
   --chip-border: rgba(239, 232, 213, 0.18);
   --chip-ink: #efe8d5;
-  border: 1px solid rgba(239, 232, 213, 0.18);
-  border-radius: 8px;
+  border: 0;
+  border-radius: 0;
   color: var(--ink);
   background: rgba(18, 34, 25, 0.96);
-  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+  box-shadow: none;
 }
 
 .day-modal__close {
@@ -679,8 +696,9 @@ button {
   margin: 0;
   font-family: var(--serif);
   font-size: clamp(2.1rem, 5vw, 3.2rem);
-  font-weight: 500;
-  line-height: 1.04;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.021em;
 }
 
 .timeline {
@@ -701,7 +719,9 @@ button {
 
 .timeline time {
   color: var(--section-emphasis, var(--coral));
-  font-weight: 800;
+  font-family: var(--label);
+  font-weight: 400;
+  letter-spacing: 0.08em;
   line-height: 1.25;
 }
 
@@ -721,6 +741,7 @@ button {
   border-color: var(--chip-border, rgba(239, 232, 213, 0.18));
   background: var(--chip-bg, rgba(210, 180, 111, 0.13));
   backdrop-filter: none;
+  border-radius: 0;
 }
 
 .hotel-grid {
@@ -750,8 +771,8 @@ button {
   flex: 0 0 100%;
   min-height: 480px;
   overflow: hidden;
-  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
-  border-radius: 8px;
+  border: 1px solid var(--card-border, transparent);
+  border-radius: 0;
   color: var(--card-ink, var(--ink));
   background: var(--card-bg, rgba(255, 250, 240, 0.78));
   scroll-snap-align: center;
@@ -780,11 +801,13 @@ button {
   margin-top: 18px;
   padding: 7px 12px;
   border: 1px solid var(--chip-border, rgba(239, 232, 213, 0.18));
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--chip-ink, var(--ivory));
   background: var(--chip-bg, rgba(210, 180, 111, 0.13));
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-family: var(--label);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
   transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
 
@@ -806,8 +829,9 @@ button {
 .feature-list li {
   padding: 7px 10px;
   border: 1px solid var(--chip-border, rgba(38, 56, 43, 0.14));
-  border-radius: 999px;
+  border-radius: 0;
   color: var(--chip-ink, var(--moss));
+  font-family: var(--label);
   font-size: 0.82rem;
 }
 
@@ -831,8 +855,8 @@ button {
   min-height: 480px;
   overflow: hidden;
   padding: 0;
-  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
-  border-radius: 8px;
+  border: 1px solid var(--card-border, transparent);
+  border-radius: 0;
   color: var(--card-ink, var(--ink));
   background: var(--card-bg, rgba(255, 250, 240, 0.78));
   box-shadow: none;
@@ -890,11 +914,13 @@ button {
   max-width: calc(100% - 24px);
   padding: 6px 9px;
   border: 1px solid rgba(255, 250, 240, 0.36);
-  border-radius: 999px;
-  color: #fffaf0;
+  border-radius: 0;
+  color: var(--ivory);
   background: rgba(22, 27, 23, 0.44);
   backdrop-filter: blur(16px);
-  font-size: 0.78rem;
+  font-family: var(--label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
 }
 
 .map-chip {
@@ -904,11 +930,13 @@ button {
   min-height: 24px;
   padding: 3px 8px;
   border: 1px solid rgba(255, 250, 240, 0.34);
-  border-radius: 999px;
-  color: #fffaf0;
+  border-radius: 0;
+  color: var(--ivory);
   background: rgba(255, 250, 240, 0.13);
-  font-size: 0.72rem;
-  font-weight: 800;
+  font-family: var(--label);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 .split-gallery {
@@ -946,11 +974,13 @@ button {
   max-width: calc(100% - 24px);
   padding: 6px 9px;
   border: 1px solid rgba(255, 250, 240, 0.36);
-  border-radius: 999px;
-  color: #fffaf0;
+  border-radius: 0;
+  color: var(--ivory);
   background: rgba(7, 17, 13, 0.48);
   backdrop-filter: blur(16px);
-  font-size: 0.78rem;
+  font-family: var(--label);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
 }
 
 .food-grid {
@@ -975,8 +1005,8 @@ button {
   flex: 0 0 100%;
   min-height: 300px;
   overflow: hidden;
-  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
-  border-radius: 8px;
+  border: 1px solid var(--card-border, transparent);
+  border-radius: 0;
   color: var(--card-ink, var(--ink));
   background: var(--card-bg, rgba(255, 250, 240, 0.78));
   scroll-snap-align: center;
@@ -1001,9 +1031,10 @@ button {
 .food-card h3 {
   margin: 0;
   font-family: var(--serif);
-  font-size: clamp(2.05rem, 3.2vw, 2.42rem);
-  font-weight: 500;
-  line-height: 1.05;
+  font-size: clamp(1.65rem, 2.4vw, 2.15rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.021em;
 }
 
 .food-card p:not(.label) {
@@ -1028,7 +1059,9 @@ button {
 .food-info dt {
   color: var(--section-accent, var(--gold));
   font-size: 0.8rem;
-  font-weight: 800;
+  font-family: var(--label);
+  font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 .food-info dd {
@@ -1038,7 +1071,7 @@ button {
 }
 
 .concert-section {
-  color: #fffaf0;
+  color: var(--ivory);
   background:
     linear-gradient(115deg, rgba(7, 17, 13, 0.98), rgba(20, 37, 29, 0.88)),
     var(--night);
@@ -1057,22 +1090,22 @@ button {
 
 .concert-copy h2,
 .concert-copy .section-kicker {
-  color: #fffaf0;
+  color: var(--ivory);
 }
 
 .concert-copy h2 {
-  font-size: 3.9rem;
+  font-size: clamp(2.2rem, 4.2vw, 3.1rem);
 }
 
 .concert-lead {
   margin: 22px 0 0;
   color: rgba(255, 250, 240, 0.74);
   font-family: var(--serif);
-  font-size: 1.4rem;
+  font-size: 1.08rem;
 }
 
 .concert-map-link {
-  color: #fffaf0;
+  color: var(--ivory);
   border-color: rgba(255, 250, 240, 0.22);
   background: rgba(255, 250, 240, 0.08);
 }
@@ -1098,7 +1131,9 @@ button {
 
 .info-list dt {
   color: #dcc384;
-  font-weight: 800;
+  font-family: var(--label);
+  font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 .info-list dd {
@@ -1110,9 +1145,9 @@ button {
   position: relative;
   min-height: 560px;
   overflow: hidden;
-  border: 1px solid rgba(255, 250, 240, 0.18);
-  border-radius: 8px;
-  box-shadow: 0 30px 120px rgba(151, 64, 196, 0.24);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .concert-gallery,
@@ -1163,7 +1198,7 @@ button {
   height: 4px;
   padding: 0;
   border: 0;
-  border-radius: 999px;
+  border-radius: 0;
   background: rgba(255, 250, 240, 0.34);
   cursor: pointer;
   transition: width 220ms ease, background 220ms ease;
@@ -1177,7 +1212,7 @@ button {
 .lyrics-panel {
   margin-top: 34px;
   border: 1px solid rgba(255, 250, 240, 0.18);
-  border-radius: 8px;
+  border-radius: 0;
   background: rgba(255, 250, 240, 0.08);
   overflow: hidden;
 }
@@ -1189,11 +1224,11 @@ button {
   gap: 14px;
   min-height: 72px;
   padding: 18px 22px;
-  color: #fffaf0;
+  color: var(--ivory);
   text-align: center;
   font-family: var(--serif);
-  font-size: clamp(1.55rem, 3vw, 2.5rem);
-  font-weight: 500;
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 400;
   line-height: 1;
   cursor: pointer;
   list-style: none;
@@ -1237,7 +1272,7 @@ button {
   min-height: 176px;
   padding: 12px;
   border: 1px solid rgba(255, 250, 240, 0.14);
-  border-radius: 8px;
+  border-radius: 0;
   background: rgba(14, 18, 28, 0.36);
   content-visibility: auto;
   contain-intrinsic-size: 176px;
@@ -1247,7 +1282,7 @@ button {
   width: 112px;
   height: 112px;
   aspect-ratio: 1;
-  border-radius: 8px;
+  border-radius: 0;
   object-fit: cover;
   background: rgba(255, 250, 240, 0.1);
 }
@@ -1260,14 +1295,16 @@ button {
   margin: 0 0 4px;
   color: #dcc384;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-family: var(--label);
+  font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 .album-body h4 {
   margin: 0;
   font-family: var(--serif);
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.08;
 }
 
@@ -1277,11 +1314,13 @@ button {
   margin-top: 10px;
   padding: 4px 9px;
   border: 1px solid rgba(255, 250, 240, 0.18);
-  border-radius: 999px;
-  color: #fffaf0;
+  border-radius: 0;
+  color: var(--ivory);
   background: rgba(255, 250, 240, 0.08);
   font-size: 0.72rem;
-  font-weight: 800;
+  font-family: var(--label);
+  font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 .track-list {
@@ -1306,8 +1345,8 @@ button {
 }
 
 .tip-card {
-  border: 1px solid var(--card-border, rgba(38, 56, 43, 0.14));
-  border-radius: 8px;
+  border: 1px solid var(--card-border, transparent);
+  border-radius: 0;
   color: var(--card-ink, var(--ink));
   background: var(--card-bg, rgba(255, 250, 240, 0.74));
   overflow: hidden;
@@ -1317,8 +1356,10 @@ button {
 .tip-card h3 {
   margin: 0 0 10px;
   color: var(--section-accent, var(--gold));
-  font-size: 1rem;
-  font-weight: 800;
+  font-family: var(--label);
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
 }
 
 .tip-card p {
@@ -1334,7 +1375,7 @@ button {
   gap: 6px;
   min-height: 156px;
   overflow: hidden;
-  color: #fffaf0;
+  color: var(--ivory);
   background: var(--night);
   text-align: center;
 }
@@ -1343,19 +1384,20 @@ button {
   position: relative;
   margin: 0;
   padding: 0 28px;
-  font-family: var(--sans);
+  font-family: var(--label);
   font-size: 0.78rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  font-weight: 400;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .site-footer small {
   padding: 0 28px;
   color: rgba(255, 250, 240, 0.64);
-  font-family: var(--sans);
+  font-family: var(--label);
   font-size: 0.74rem;
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: 0.12em;
 }
 
 @keyframes panelIn {
@@ -1401,7 +1443,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 5.4rem;
+    font-size: clamp(3rem, 9vw, 4.8rem);
   }
 
   .hero-content {
@@ -1431,7 +1473,7 @@ button {
 
   .section-head h2,
   .concert-copy h2 {
-    font-size: 3.2rem;
+    font-size: 2.6rem;
   }
 
   .day-page {
@@ -1481,7 +1523,7 @@ button {
   }
 
   body {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .top-nav {
@@ -1510,7 +1552,7 @@ button {
   }
 
   .hero h1 {
-    font-size: 3.55rem;
+    font-size: 2.86rem;
   }
 
   .hero-meta {
@@ -1519,10 +1561,6 @@ button {
 
   .hero-content {
     padding-bottom: 74px;
-  }
-
-  .hero h1 [lang="th"] {
-    font-size: 2.08rem;
   }
 
   .hero-meta span,
@@ -1549,7 +1587,7 @@ button {
 
   .section-head h2,
   .concert-copy h2 {
-    font-size: 2.62rem;
+    font-size: 2.18rem;
   }
 
   .day-copy {
@@ -1560,7 +1598,7 @@ button {
   .hotel-card h3,
   .panel-copy h3,
   .food-card h3 {
-    font-size: 2.12rem;
+    font-size: 1.78rem;
   }
 
   .timeline {
